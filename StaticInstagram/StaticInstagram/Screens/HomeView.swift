@@ -29,8 +29,14 @@ struct HomeView: View {
                     }
                     .scrollIndicators(.hidden)
                     
-                    LazyVStack {
-                        NewsView()
+                    VStack(spacing: 24) {
+                        NewsView(avatar: "rodeo", name: "warrenhue", subName: "BOY OF THE YEAR ▶", image: "dogs", caption: "may con cho lay !!!!")
+                        NewsView(avatar: "rodeo", name: "xhiew.21", subName: "Last Performance ▶", image: "dog", caption: "OMG!!!!!!!!!!!")
+                        NewsView(avatar: "rodeo", name: "coldzy", subName: "LOOP ▶", image: "mountain", caption: "neu em da loi vay thi, anh khong co van de gi")
+                        NewsView(avatar: "rodeo", name: "tobilou", subName: "How to skin care 2020 ▶", image: "girl", caption: "🌝🌝🌝")
+                        NewsView(avatar: "rodeo", name: "24k_right", subName: "RODEO ▶", image: "man", caption: "mot nua su that !!")
+                        NewsView(avatar: "rodeo", name: "wxrdie", subName: "MOIEM ▶", image: "jesus", caption: "baby can u call me ?")
+                        NewsView(avatar: "rodeo", name: "koi", subName: "Lonely Stonie ▶", image: "playground", caption: "...")
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -116,20 +122,52 @@ struct AvatarView: View {
 }
 
 struct NewsView: View {
+    let avatar: String
+    let name: String
+    let subName: String
+    let image: String
+    let caption: String
+    
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
             HStack(alignment: .center , spacing: 4) {
-                AvatarView(isShowAddButton: false, isAddButtonOnTop: false, avatarImage: "rodeo", note: "", name: "")
+                AvatarView(isShowAddButton: false, isAddButtonOnTop: false, avatarImage: avatar, note: "", name: "")
                     .frame(width: 50, height: 50)
                 VStack(alignment: .leading) {
-                    Text("warrenhue").font(.caption.bold())
-                    Text("BOY OF THE YEAR ▶").font(.caption2.weight(.light))
+                    Text(name).font(.caption.bold())
+                    Text(subName).font(.caption2.weight(.light))
                         .padding(.bottom, 4)
                 }
                 Spacer()
                 Image(systemName: "ellipsis")
-            }.padding(16)
+            }.padding([.horizontal, .top], 16)
+            
+            Image(image)
+                .resizable()
+                .aspectRatio(1, contentMode: .fit)
+                .padding(.horizontal, 16)
+                .overlay {
+                    Rectangle()
+                        .stroke(.black, lineWidth: 2)
+                        .padding(.horizontal, 16)
+                }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 16) {
+                    Image("heart")
+                    Image("comment")
+                    Image("send")
+                    Spacer()
+                    Image("save")
+                }
+                
+                Text("21 Likes").font(.callout.bold())
+                
+                Text(caption).font(.callout.weight(.light))
+                
+                Text("View all 11 comments").font(.caption)
+                    .foregroundStyle(.gray)
+            }.padding(.horizontal, 24).padding(.top, 16)
         }
-        
     }
 }
